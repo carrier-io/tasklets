@@ -1,0 +1,126 @@
+<div class="container-fluid mt-3">
+
+  <div class="row">
+    <div class="col"> <!-- col -->
+
+
+      <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+
+                  <form method="post" action="{{ save_url }}" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-10">
+                        <div class="card">
+                          <div class="card-header">
+                            <strong>{{ bucket|e }} - {{ obj|e }}</strong>
+                          </div>
+                          <div class="card-body">
+                            <textarea class="col-12" rows="10" id="data" name="data">{{ object_data }}</textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="card">
+                          <div class="card-header">
+                            <strong>Actions</strong>
+                          </div>
+                          <div class="list-group">
+                            <input type="submit" class="list-group-item list-group-item-action" value="Save">
+                            <a href="{{ cancel_url }}" class="list-group-item list-group-item-action">Cancel</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+
+    </div> <!-- col -->
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+        <!-- <div class="card mt-3 card-table-sm">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <h4>Tasks</h4>
+                    </div>
+                    <div class="col-8">
+                        <div class="d-flex justify-content-end">
+                            <button id="btn-plus" type="button" class="btn btn-secondary btn-sm btn-icon__sm mr-2" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless"
+                    id="table"
+                    data-toggle="table"
+                    data-url="{{ url_for('api.v1.tasklets.registry') }}"
+
+                    data-unique-id="id"
+
+                    data-pagination="true"
+                    data-pagination-pre-text="<img src='/design-system/static/assets/ico/arrow_left.svg'>"
+                    data-pagination-next-text="<img src='/design-system/static/assets/ico/arrow_right.svg'>"
+
+                    data-page-size=5
+                    data-page-list="[5, 10, 15]"
+
+                  >
+
+                  data-side-pagination="server" -->
+                  <!-- data-page-list="[10, 25, 50, 100, all]" -->
+                  <!-- data-toolbar="#toolbar"
+
+                    <thead class="thead-light">
+                        <tr>
+                            <th data-visible="false" data-field="id">ID</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="name">Name</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="description">Description</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="source_url">Source URL</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="source_branch">Source branch</th>
+                            <th scope="col" data-align="right" data-cell-style="cellStyle" data-formatter="actionsFormatter" data-events="actionsEvents">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+
+</div>
+
+
+
+<!-- <script src="{{ url_for('tasklets.static', filename='js/vendor/jquery.serialize-object.min.js') }}"></script>
+<script src="{{ url_for('tasklets.static', filename='js/vendor/axios.min.js') }}"></script> -->
+
+{#% include "tasklets:registry/modal_create.html" %#}
+{#% include "vuln_manual:issues/modal_view.html" %#}
+
+<!-- <script>
+  var api_url = "{{ url_for('api.v1.tasklets.registry') }}";
+  var view_row = {};
+</script> -->
+
+<!-- <script src="{{ url_for('tasklets.static', filename='js/registry.js') }}"></script> -->

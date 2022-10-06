@@ -1,0 +1,139 @@
+<div class="container-fluid mt-3">
+
+  <div class="row">
+    <div class="col-2"> <!-- streams -->
+
+      <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h4>Streams</h4>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-32 btn-secondary" data-toggle="modal" data-target="#modal-stream-create"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="custom-nav flex-column">
+
+          {%- for stream in streams %}
+          <li class="custom-nav_item d-flex justify-content-between align-items-center {% if stream.name == active_stream %}active{% endif %}">
+              <a class="" href="{{ url_for('theme.route_section_subsection', section='tasklets', subsection='runs', stream=stream.name) }}">{{ stream.name|e }}</a>
+              <!-- <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                  <i class="fas fa-trash-alt"></i>
+              </button> -->
+          </li>
+          {%- endfor %}
+
+        </ul>
+      </div>
+
+    </div> <!-- streams -->
+
+    <div class="col-2"> <!-- cycles -->
+
+      <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h4>Cycles</h4>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-32 btn-secondary" data-toggle="modal" data-target="#modal-cycle-create"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="custom-nav flex-column">
+
+            {%- for cycle in cycles %}
+            <li class="custom-nav_item d-flex justify-content-between align-items-center {% if cycle.name == active_cycle %}active{% endif %}">
+                <a class="" href="{{ url_for('theme.route_section_subsection', section='tasklets', subsection='runs', stream=active_stream, cycle=cycle.name) }}">{{ cycle.name|e }}</a>
+                <!-- <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                    <i class="fas fa-trash-alt"></i>
+                </button> -->
+            </li>
+            {%- endfor %}
+
+        </ul>
+      </div>
+
+    </div> <!-- cycles -->
+
+    <div class="col-8"> <!-- runs -->
+
+
+      <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <h4>Runs</h4>
+                </div>
+                <div class="col-8">
+                    <div class="d-flex justify-content-end">
+                      <button id="btn-refresh" type="button" class="btn btn-secondary btn-sm btn-icon__sm mr-2"><i class="fas fa-sync"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-borderless"
+              id="table"
+              data-toggle="table"
+              data-url="{{ url_for('api.v1.tasklets.registry_runs', stream=active_stream, cycle=active_cycle) }}"
+
+              data-unique-id="id"
+
+              data-pagination="true"
+              data-pagination-pre-text="<img src='/design-system/static/assets/ico/arrow_left.svg'>"
+              data-pagination-next-text="<img src='/design-system/static/assets/ico/arrow_right.svg'>"
+
+              data-page-size=5
+              data-page-list="[5, 10, 15]"
+
+            >
+
+            <!-- data-side-pagination="server" -->
+            <!-- data-page-list="[10, 25, 50, 100, all]" -->
+            <!-- data-toolbar="#toolbar" -->
+
+              <thead class="thead-light">
+                  <tr>
+                      <th data-visible="false" data-field="id">ID</th>
+                      <!-- <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="stream">Stream</th> -->
+                      <!-- <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="cycle">Cycle</th> -->
+                      <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="description">Description</th>
+                      <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="tasklet_name">Tasklet</th>
+                      <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="state">State</th>
+                      <th scope="col" data-align="right" data-cell-style="cellStyle" data-formatter="actionsFormatter" data-events="actionsEvents">Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+    </div> <!-- runs -->
+  </div>
+
+</div>
+
+<script src="{{ url_for('tasklets.static', filename='js/vendor/jquery.serialize-object.min.js') }}"></script>
+<script src="{{ url_for('tasklets.static', filename='js/vendor/axios.min.js') }}"></script>
+
+{% include "tasklets:runs/modal_stream_create.html" %}
+{% include "tasklets:runs/modal_cycle_create.html" %}
+
+<script>
+  var run_logs_url = "{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='registry', page='run_logs') }}";
+  var stream_api_url = "{{ url_for('api.v1.tasklets.streams') }}";
+  var cycle_api_url = "{{ url_for('api.v1.tasklets.cycles') }}";
+</script>
+
+<script src="{{ url_for('tasklets.static', filename='js/runs.js') }}"></script>

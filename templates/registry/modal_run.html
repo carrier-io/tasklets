@@ -1,0 +1,50 @@
+<div id="modal-run" class="modal modal-small fixed-left fade shadow-sm" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-aside" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Run task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col">
+
+            <form id="form-run">
+              <div class="form-group">
+                <label for="input-stream">Stream</label>
+                <input type="text" class="form-control" name="stream" id="input-stream" value="Default" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="input-cycle">Cycle</label>
+                <input type="text" class="form-control" name="cycle" id="input-cycle" value="Common" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="input-description">Description</label>
+                <input type="text" class="form-control" name="description" id="input-description" value="" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="input-worker">Worker</label>
+                <input type="text" class="form-control" name="worker" id="input-worker" value="tasklets-worker" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="input-kvargs">KVargs JSON</label>
+                <input type="text" class="form-control" name="kvargs" id="input-kvargs" value="{}" placeholder="">
+              </div>
+              <input type="hidden" name="name" id="input-tasklet-name" value="">
+            </form>
+
+          </div> <!-- col -->
+        </div> <!-- row -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btn-run">Run</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

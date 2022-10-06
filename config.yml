@@ -1,0 +1,72 @@
+# TODO: multiple stores support?
+minio:
+  endpoint: "$MINIO_HOST"
+  region: "$MINIO_REGION"
+  access_key: "$MINIO_ACCESS_KEY"
+  secret_key: "$MINIO_SECRET_KEY"
+  secure: false
+  verify: false
+
+rabbitmq:
+  host: "$RABBIT_HOST"
+  port: 5672
+  user: "$RABBITMQ_USER"
+  password: "$RABBITMQ_PASSWORD"
+  timeout: 15
+  vhost: "carrier"
+  all_queue: "tasklets-arbiter-all"
+
+runner:
+  pylon:
+    loki:
+      buffering: false
+      buffer_capacity: 70
+      include_node_name: true
+      include_level_name: true
+      include_logger_name: true
+      verify: true
+      url: ${LOKI_HOST}
+    #
+    # "vault": {}
+    #
+    # TODO: multiple stores support?
+    #
+    storage:
+      endpoint: "$MINIO_HOST"
+      region: "$MINIO_REGION"
+      access_key: "$MINIO_ACCESS_KEY"
+      secret_key: "$MINIO_SECRET_KEY"
+      secure: false
+      verify: false
+    #
+    rpc:
+      rabbitmq:
+        host: "rabbitmq"
+        port: 5672
+        user: "user"
+        password: "password"
+        vhost: "carrier"
+        queue: "rpc"
+        hmac_key: "key"
+        hmac_digest: "sha512"
+        callback_workers: 16
+      id_prefix: "worker_"
+      # TODO: check prefix and make it uniq
+    #
+    events:
+      rabbitmq:
+        host: "rabbitmq"
+        port: 5672
+        user: "user"
+        password: "password"
+        vhost: "carrier"
+        queue: "tasklets-events"
+        hmac_key: "key"
+        hmac_digest: "sha512"
+        callback_workers: 16
+  #
+  provider:
+    name: "pylon.core.providers.source.git"
+    args:
+      delete_git_dir: false
+      depth: null

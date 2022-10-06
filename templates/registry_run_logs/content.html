@@ -1,0 +1,25 @@
+<div class="container-fluid">
+
+  <div class="card mt-3 card-table-sm">
+      <div class="card-header">
+          <div class="row">
+              <div class="col-4">
+                  <h4>Tasklet run logs</h4>
+              </div>
+              <div class="col-8">
+                  <div class="d-flex justify-content-end">
+                      <button id="btn-stop" type="button" class="btn btn-secondary btn-sm btn-icon__sm mr-2"><i class="fas fa-stop"></i></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
+
+        <RunLogsApp
+          run_websocket_url="{{ run_websocket_url|e }}"
+        ></RunLogsApp>
+
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,171 @@
+<div class="container-fluid mt-3">
+
+  <div class="row">
+    <div class="col-4"> <!-- left -->
+
+
+      <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <h4>Buckets</h4>
+                </div>
+                <div class="col-8">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-32 btn-secondary" data-toggle="modal" data-target="#modal-bucket-create"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="custom-nav flex-column">
+            {%- for bucket in all_buckets %}
+            <li class="custom-nav_item d-flex justify-content-between align-items-center {% if bucket.name == active_bucket_name %}active{% endif %}">
+                <a class="" href="{{ url_for('theme.route_section_subsection', section='tasklets', subsection='storage', bucket=bucket.name) }}">{{ bucket.name|e }}</a>
+                <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                  <a href="{{ url_for('tasklets.storage_bucket_delete', bucket=bucket.name) }}" onclick="return window.confirm('Delete bucket {{ bucket.name|e }}?');">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </button>
+            </li>
+            {%- endfor %}
+        </ul>
+      </div>
+
+
+
+    </div> <!-- left -->
+    <div class="col-8"> <!-- right -->
+
+
+      <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <h4>Objects</h4>
+                </div>
+                <div class="col-8">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-32 btn-secondary" data-toggle="modal" data-target="#modal-upload"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="custom-nav flex-column">
+          {%- for object in active_bucket_objects %}
+          <li class="custom-nav_item d-flex justify-content-between align-items-center">
+              <a class="" href="#">{{ object.object_name|e }} - {{ object.size|e }} bytes</a>
+              <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='storage', page='edit', bucket=active_bucket_name, obj=object.object_name) }}">
+                  <i class="fas fa-pen"></i>
+                </a>
+              </button>
+              <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='storage', page='edit_json_gz', bucket=active_bucket_name, obj=object.object_name) }}">
+                  <i class="fas fa-quidditch"></i>
+                </a>
+              </button>
+              <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('tasklets.storage_download', bucket=active_bucket_name, obj=object.object_name) }}">
+                  <i class="fas fa-download"></i>
+                </a>
+              </button>
+              <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                  <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('tasklets.storage_view', bucket=active_bucket_name, obj=object.object_name) }}">
+                    <i class="fas fa-eye"></i>
+                  </a>
+              </button>
+              <button class="btn btn-default btn-xs btn-table btn-icon__xs">
+                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('tasklets.storage_delete', bucket=active_bucket_name, obj=object.object_name) }}" onclick="return window.confirm('Delete object {{ object.object_name|e }}?');">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </button>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+
+
+
+    </div> <!-- right -->
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+        <!-- <div class="card mt-3 card-table-sm">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-4">
+                        <h4>Tasks</h4>
+                    </div>
+                    <div class="col-8">
+                        <div class="d-flex justify-content-end">
+                            <button id="btn-plus" type="button" class="btn btn-secondary btn-sm btn-icon__sm mr-2" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless"
+                    id="table"
+                    data-toggle="table"
+                    data-url="{{ url_for('api.v1.tasklets.registry') }}"
+
+                    data-unique-id="id"
+
+                    data-pagination="true"
+                    data-pagination-pre-text="<img src='/design-system/static/assets/ico/arrow_left.svg'>"
+                    data-pagination-next-text="<img src='/design-system/static/assets/ico/arrow_right.svg'>"
+
+                    data-page-size=5
+                    data-page-list="[5, 10, 15]"
+
+                  >
+
+                  data-side-pagination="server" -->
+                  <!-- data-page-list="[10, 25, 50, 100, all]" -->
+                  <!-- data-toolbar="#toolbar"
+
+                    <thead class="thead-light">
+                        <tr>
+                            <th data-visible="false" data-field="id">ID</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="name">Name</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="description">Description</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="source_url">Source URL</th>
+                            <th scope="col" data-sortable="true" data-cell-style="nameStyle" data-field="source_branch">Source branch</th>
+                            <th scope="col" data-align="right" data-cell-style="cellStyle" data-formatter="actionsFormatter" data-events="actionsEvents">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+
+</div>
+
+
+
+<!-- <script src="{{ url_for('tasklets.static', filename='js/vendor/jquery.serialize-object.min.js') }}"></script>
+<script src="{{ url_for('tasklets.static', filename='js/vendor/axios.min.js') }}"></script> -->
+
+{% include "tasklets:storage/modal_bucket_create.html" %}
+{% include "tasklets:storage/modal_upload.html" %}
+{#% include "vuln_manual:issues/modal_view.html" %#}
+
+<!-- <script>
+  var api_url = "{{ url_for('api.v1.tasklets.registry') }}";
+  var view_row = {};
+</script> -->
+
+<!-- <script src="{{ url_for('tasklets.static', filename='js/registry.js') }}"></script> -->
