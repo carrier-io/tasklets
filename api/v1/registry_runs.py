@@ -89,3 +89,25 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
             ),
             "rows": result,
         }
+
+    @auth.decorators.check_api(["global_admin"])
+    def put(self):  # pylint: disable=R0201
+        """ Process PUT """
+        run_id = flask.request.args.get("id")  # TODO: validation with pydantic
+        #
+        run = self.module.get_run(run_id)
+        if run is None:
+            return {"ok": False}
+        #
+        log.info("Re-running: %s", run)
+        #
+        run_id = self.module.run_tasklet(
+            run["tasklet_name"], kvargs=run["kvargs"],
+            stream=run["stream"], cycle=run["cycle"],
+            description=f'[Re-run] {run["description"]}',
+            worker=run["worker"]
+        )
+        #
+        log.info("Run ID: %s", run_id)
+        #
+        return {"ok": True}
