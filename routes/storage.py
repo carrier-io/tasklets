@@ -182,7 +182,10 @@ class Route:  # pylint: disable=E1101,R0903
         #
         try:
             data = minio.get_object(bucket, obj)
-            return flask.send_file(data, as_attachment=True, attachment_filename=obj)
+            try:
+                return flask.send_file(data, attachment_filename=obj)
+            except TypeError:  # new flask
+                return flask.send_file(data, download_name=obj, as_attachment=True)
         except:  # pylint: disable=W0702
             log.exception("Download failed for %s:%s", bucket, obj)
         #
