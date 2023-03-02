@@ -17,8 +17,8 @@ const RunLogsApp = {
     },
     mounted() {
       this.state = 'initializing'
-      this.logs_pull_end = this.logs_ts_now
-      this.logs_tail_ts = this.logs_ts_now + 1
+      this.logs_pull_end = parseInt(this.logs_ts_now, 10)
+      this.logs_tail_ts = parseInt(this.logs_ts_now, 10) + 1
       this.init_websocket()
     },
     computed: {
@@ -26,8 +26,7 @@ const RunLogsApp = {
             return this.logs.reverse()
         },
         websocket_url: function () {
-            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString()
-            // + '&limit=' + this.logs_tail_limit.toString()
+            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString() + '&limit=' + this.logs_tail_limit.toString()
         },
     },
     template: `
