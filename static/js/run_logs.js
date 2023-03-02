@@ -54,16 +54,16 @@ const RunLogsApp = {
             axios.get(this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' + this.logs_query_limit.toString())
               .then(this.on_pull_reply)
               .catch(this.on_pull_error)
-        }
+        },
         on_pull_reply(response) {
             console.log("Response:")
             console.log(response)
-        }
+        },
         on_pull_error(error) {
             console.log("Error:")
             console.log(error)
             // this.init_websocket()
-        }
+        },
         init_websocket() {
             this.state = 'connecting'
             this.websocket = new WebSocket(this.websocket_url)
