@@ -89,6 +89,7 @@ const RunLogsApp = {
 
             current_items.forEach(current_item => {
                 this.logs.push(current_item["message"])
+                this.logs_tail_ts = current_item["ts"] + BigInt(1)
             })
         },
         on_websocket_close(message) {
