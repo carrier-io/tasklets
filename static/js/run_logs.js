@@ -10,7 +10,7 @@ const RunLogsApp = {
             logs_pull_end: 0,
             logs_tail_ts: 0,
             logs_query_limit: 1000,
-            logs_tail_limit: 10000000000,
+            logs_tail_limit: 1000,
             logs: []
         }
 
@@ -30,8 +30,7 @@ const RunLogsApp = {
             return this.logs.reverse()
         },
         websocket_url: function () {
-            return this.run_websocket_url
-            //  + '&start=' + this.logs_tail_ts.toString()  + '&limit=' + this.logs_tail_limit.toString()
+            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString()  + '&limit=' + this.logs_tail_limit.toString()
         },
     },
     template: `
