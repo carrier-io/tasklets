@@ -30,7 +30,8 @@ const RunLogsApp = {
             return this.logs.reverse()
         },
         websocket_url: function () {
-            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString()  + '&limit=' + this.logs_tail_limit.toString()
+            return this.run_websocket_url
+            //  + '&start=' + this.logs_tail_ts.toString()  + '&limit=' + this.logs_tail_limit.toString()
         },
     },
     template: `
