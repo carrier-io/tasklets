@@ -86,7 +86,9 @@ const RunLogsApp = {
                 this.logs.push(current_item["message"])
             })
 
+            console.log("Got log history items: ", current_items.length)
             if (current_items.length < this.logs_query_limit) {
+                console.log("Total log history items: ", this.logs.length)
                 this.init_websocket()
             } else {
                 this.logs_pull_end = current_items[0]["ts"] - BigInt(1)
