@@ -5,7 +5,7 @@ const RunLogsApp = {
         return {
             state: 'idle',
             websocket: undefined,
-            connection_retries: 5,
+            retry_interval: undefined,
             connection_retry_timeout: 5000,
             logs_pull_end: 0,
             logs_tail_ts: 0,
@@ -21,16 +21,13 @@ const RunLogsApp = {
       this.logs_tail_ts = this.logs_ts_now + 1
       this.init_websocket()
     },
-    // updated() {
-    //     var item = $("#logs-body");
-    //     item.scrollTop(item.prop("scrollHeight"));
-    // },
     computed: {
         reversedLogs: function () {
             return this.logs.reverse()
         },
         websocket_url: function () {
-            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString()  + '&limit=' + this.logs_tail_limit.toString()
+            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString()
+            // + '&limit=' + this.logs_tail_limit.toString()
         },
     },
     template: `
@@ -83,20 +80,15 @@ const RunLogsApp = {
         },
         on_websocket_close(message) {
             this.state = 'disconnected'
-            let attempt = 1;
-            const intrvl = setInterval(() => {
+            this.retry_interval = setInterval(() => {
+                clearInterval(this.retry_interval)
                 this.init_websocket()
-                if (this.state === 'connected' || attempt > this.connection_retries) clearInterval(intrvl)
-                attempt ++
             }, this.connection_retry_timeout)
-            // setTimeout(websocket_connect, 1 * 1000);
-            //    clearInterval(websocket_connect)
         },
         on_websocket_error(message) {
             this.state = 'error'
             this.websocket.close()
         }
-
     }
 }
 
