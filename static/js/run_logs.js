@@ -82,16 +82,16 @@ const RunLogsApp = {
                 }
             });
 
+            this.logs_pull_end = current_items[0]["ts"] - BigInt(1)
+
+            current_items.reverse()
             current_items.forEach(current_item => {
-                this.logs.push(current_item["message"])
+                this.logs.unshift(current_item["message"])
             })
 
-            console.log("Got log history items: ", current_items.length)
             if (current_items.length < this.logs_query_limit) {
-                console.log("Total log history items: ", this.logs.length)
                 this.init_websocket()
             } else {
-                this.logs_pull_end = current_items[0]["ts"] - BigInt(1)
                 axios.get(
                     this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' + this.logs_query_limit.toString(),
                     {
