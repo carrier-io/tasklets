@@ -51,7 +51,7 @@ class Slot:  # pylint: disable=E1101,R0903
         run_id = payload.request.args.get("id", None)
         #
         websocket_base_url = self.context.settings["loki"]["url"]
-        websocket_query_url = websocket_base_url.replace("api/v1/push", "api/v1/query_range")
+        websocket_base_query_url = websocket_base_url.replace("api/v1/push", "api/v1/query_range")
         #
         websocket_base_url = websocket_base_url.replace("http://", "ws://")
         websocket_base_url = websocket_base_url.replace("https://", "wss://")
@@ -61,6 +61,7 @@ class Slot:  # pylint: disable=E1101,R0903
         logs_ts_now = int(time.time() * 1000000000)
         #
         websocket_url = f"{websocket_base_url}?query={logs_query}"
+        websocket_query_url = f"{websocket_base_query_url}?query={logs_query}"
         #
         with context.app.app_context():
             return self.descriptor.render_template(

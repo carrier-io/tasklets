@@ -19,7 +19,7 @@ const RunLogsApp = {
       this.state = 'initializing'
       this.logs_pull_end = BigInt(this.logs_ts_now)
       this.logs_tail_ts = BigInt(this.logs_ts_now) + BigInt(1)
-      this.init_websocket()
+      this.init()
     },
     computed: {
         reversedLogs: function () {
@@ -48,6 +48,22 @@ const RunLogsApp = {
         </div>
     `,
     methods: {
+        init() {
+            this.state = 'pulling'
+            this.init_websocket()
+            axios.get(this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' this.logs_query_limit.toString())
+              .then(this.on_pull_reply)
+              .catch(this.on_pull_error)
+        }
+        on_pull_reply(response) {
+            console.log("Response:")
+            console.log(response)
+        }
+        on_pull_error(error) {
+            console.log("Error:")
+            console.log(error)
+            // this.init_websocket()
+        }
         init_websocket() {
             this.state = 'connecting'
             this.websocket = new WebSocket(this.websocket_url)
@@ -107,32 +123,3 @@ const RunLogsApp = {
 }
 
 vueApp.component('runlogsapp', RunLogsApp)
-
-// $(document).on('vue_init', () => {
-//     $('#show_config_btn').on('click', () => {
-//         $('#showConfigModal button').attr('disabled', true)
-//         $('#showConfigModal button[data-toggle=collapse]').attr('disabled', false)
-//         $('#showConfigModal button[data-dismiss=modal]').attr('disabled', false)
-//         $('#showConfigModal input').attr('disabled', true)
-//         $('#showConfigModal input[type=text]').attr('readonly', true)
-//     })
-//
-//     $('#re_run_test').on('click', reRunTest)
-//     $( document ).on( 'updateSummaryEvent', updateSummary);
-// })
-//
-// $("#btn-save").click(function() {
-//   var data = $("#form-create").serializeObject();
-//
-//   axios.post(api_url, data)
-//     .then(function (response) {
-//       // console.log(response);
-//       $("#table").bootstrapTable("refresh", {});
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-//
-//
-//   $("#modal-create").modal("hide");
-// });
