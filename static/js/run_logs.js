@@ -17,8 +17,8 @@ const RunLogsApp = {
     },
     mounted() {
       this.state = 'initializing'
-      this.logs_pull_end = parseInt(this.logs_ts_now, 10)
-      this.logs_tail_ts = parseInt(this.logs_ts_now, 10) + 1
+      this.logs_pull_end = BigInt(this.logs_ts_now)
+      this.logs_tail_ts = BigInt(this.logs_ts_now) + 1
       this.init_websocket()
       console.log("TS #1: ", this.logs_ts_now)
       console.log("TS #2: ", this.logs_pull_end)
