@@ -50,24 +50,61 @@ const RunLogsApp = {
     methods: {
         init() {
             this.state = 'pulling'
-            this.init_websocket()
             axios.get(
                 this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' + this.logs_query_limit.toString(),
                 {
                   withCredentials: true,
+                  headers: {'X-Requested-With': 'UI'},
                 }
             )
               .then(this.on_pull_reply)
               .catch(this.on_pull_error)
         },
         on_pull_reply(response) {
-            console.log("Response:")
-            console.log(response)
+            let current_items = []
+
+            response.data.data.result.forEach(stream_item => {
+                stream_item.values.forEach(message_item => {
+                    current_items.push({
+                      "ts": BigInt(message_item[0]),
+                      "message": message_item[1],
+                    })
+                })
+            })
+
+            current_items.sort((first, second) => {
+                if (first["ts"] > second["ts"]) {
+                    return 1;
+                } else if (first["ts"] < second["ts"]) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+
+            current_items.forEach(current_item => {
+                this.logs.push(current_item["message"])
+            })
+
+            if (current_items.length < this.logs_query_limit) {
+                this.init_websocket()
+            } else {
+                this.logs_pull_end = current_items[0]["ts"] - BigInt(1)
+                axios.get(
+                    this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' + this.logs_query_limit.toString(),
+                    {
+                      withCredentials: true,
+                      headers: {'X-Requested-With': 'UI'},
+                    }
+                )
+                  .then(this.on_pull_reply)
+                  .catch(this.on_pull_error)
+            }
         },
         on_pull_error(error) {
-            console.log("Error:")
+            console.log("Logs: pull error (see below). Will init websocket anyways")
             console.log(error)
-            // this.init_websocket()
+            this.init_websocket()
         },
         init_websocket() {
             this.state = 'connecting'
