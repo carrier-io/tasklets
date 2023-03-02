@@ -51,7 +51,12 @@ const RunLogsApp = {
         init() {
             this.state = 'pulling'
             this.init_websocket()
-            axios.get(this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' + this.logs_query_limit.toString())
+            axios.get(
+                this.query_websocket_url + '&start=0' + '&end=' + this.logs_pull_end.toString() + '&limit=' + this.logs_query_limit.toString(),
+                {
+                  withCredentials: true,
+                }
+            )
               .then(this.on_pull_reply)
               .catch(this.on_pull_error)
         },
