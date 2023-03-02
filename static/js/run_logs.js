@@ -1,17 +1,24 @@
 const RunLogsApp = {
     delimiters: ['[[', ']]'],
-    props: ['run_websocket_url'],
+    props: ['run_websocket_url', 'query_websocket_url', 'logs_ts_now'],
     data() {
         return {
-            state: 'unknown',
+            state: 'idle',
             websocket: undefined,
             connection_retries: 5,
-            connection_retry_timeout: 2000,
+            connection_retry_timeout: 5000,
+            logs_pull_end: 0,
+            logs_tail_ts: 0,
+            logs_query_limit: 1000,
+            logs_tail_limit: 10000000000,
             logs: []
         }
 
     },
     mounted() {
+      this.state = 'initializing'
+      this.logs_pull_end = this.logs_ts_now
+      this.logs_tail_ts = this.logs_ts_now + 1
       this.init_websocket()
     },
     // updated() {
@@ -21,6 +28,9 @@ const RunLogsApp = {
     computed: {
         reversedLogs: function () {
             return this.logs.reverse()
+        },
+        websocket_url: function () {
+            return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString()  + '&limit=' + this.logs_tail_limit.toString()
         },
     },
     template: `
@@ -43,7 +53,8 @@ const RunLogsApp = {
     `,
     methods: {
         init_websocket() {
-            this.websocket = new WebSocket(this.run_websocket_url)
+            this.state = 'connecting'
+            this.websocket = new WebSocket(this.websocket_url)
             this.websocket.onmessage = this.on_websocket_message
             this.websocket.onopen = this.on_websocket_open
             this.websocket.onclose = this.on_websocket_close
@@ -59,9 +70,13 @@ const RunLogsApp = {
             }
 
             const data = JSON.parse(message.data)
+            let current_items = []
 
             data.streams.forEach(stream_item => {
                 stream_item.values.forEach(message_item => {
+                    console.log('Message item:')
+                    console.log(message_item)
+                    current_items.push(message_item)
                     this.logs.push(`${stream_item.stream.level} : ${message_item[1]}`)
                 })
             })

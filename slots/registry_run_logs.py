@@ -17,6 +17,8 @@
 
 """ Slot """
 
+import time
+
 # from pylon.core.tools import log  # pylint: disable=E0611,E0401
 from pylon.core.tools import web  # pylint: disable=E0611,E0401
 
@@ -49,21 +51,23 @@ class Slot:  # pylint: disable=E1101,R0903
         run_id = payload.request.args.get("id", None)
         #
         websocket_base_url = self.context.settings["loki"]["url"]
+        websocket_query_url = websocket_base_url.replace("api/v1/push", "api/v1/query_range")
+        #
         websocket_base_url = websocket_base_url.replace("http://", "ws://")
         websocket_base_url = websocket_base_url.replace("https://", "wss://")
         websocket_base_url = websocket_base_url.replace("api/v1/push", "api/v1/tail")
         #
         logs_query = "{" + f'log_type="tasklet",run_id="{run_id}"' + "}"
+        logs_ts_now = int(time.time() * 1000000000)
         #
-        logs_start = 0
-        logs_limit = 10000000000
-        #
-        websocket_url = f"{websocket_base_url}?query={logs_query}&start={logs_start}&limit={logs_limit}"
+        websocket_url = f"{websocket_base_url}?query={logs_query}"
         #
         with context.app.app_context():
             return self.descriptor.render_template(
                 "registry_run_logs/content.html",
                 run_websocket_url=websocket_url,
+                query_websocket_url=websocket_query_url,
+                logs_ts_now=logs_ts_now,
             )
 
     @web.slot("tasklets_registry_run_logs_scripts")
