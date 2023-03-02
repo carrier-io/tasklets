@@ -20,9 +20,6 @@ const RunLogsApp = {
       this.logs_pull_end = BigInt(this.logs_ts_now)
       this.logs_tail_ts = BigInt(this.logs_ts_now) + BigInt(1)
       this.init_websocket()
-      console.log("TS #1: ", this.logs_ts_now)
-      console.log("TS #2: ", this.logs_pull_end)
-      console.log("TS #3: ", this.logs_tail_ts)
     },
     computed: {
         reversedLogs: function () {
@@ -75,9 +72,15 @@ const RunLogsApp = {
                 stream_item.values.forEach(message_item => {
                     console.log('Message item:')
                     console.log(message_item)
-                    current_items.push(message_item)
-                    this.logs.push(`${stream_item.stream.level} : ${message_item[1]}`)
+                    current_items.push({
+                      "ts": BigInt(message_item[0]),
+                      "message": message_item[1],
+                    })
                 })
+            })
+
+            current_items.forEach(current_item => {
+              this.logs.push(current_item["message"])
             })
         },
         on_websocket_close(message) {
