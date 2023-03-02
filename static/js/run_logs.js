@@ -23,7 +23,7 @@ const RunLogsApp = {
     },
     computed: {
         reversedLogs: function () {
-            return this.logs.reverse()
+            return this.logs.slice().reverse()
         },
         websocket_url: function () {
             return this.run_websocket_url + '&start=' + this.logs_tail_ts.toString() + '&limit=' + this.logs_tail_limit.toString()
@@ -70,8 +70,6 @@ const RunLogsApp = {
 
             data.streams.forEach(stream_item => {
                 stream_item.values.forEach(message_item => {
-                    console.log('Message item:')
-                    console.log(message_item)
                     current_items.push({
                       "ts": BigInt(message_item[0]),
                       "message": message_item[1],
@@ -79,8 +77,18 @@ const RunLogsApp = {
                 })
             })
 
+            current_items.sort((first, second) => {
+                if (first["ts"] > second["ts"]) {
+                    return 1;
+                } else if (first["ts"] < second["ts"]) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+
             current_items.forEach(current_item => {
-              this.logs.push(current_item["message"])
+                this.logs.push(current_item["message"])
             })
         },
         on_websocket_close(message) {
