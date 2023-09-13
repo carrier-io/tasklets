@@ -44,7 +44,7 @@ class Slot:  # pylint: disable=E1101,R0903
     """
 
     @web.slot("tasklets_registry_runs_scripts")
-    @auth.decorators.check_slot(["tasklets.registry.runs"], access_denied_reply=theme.access_denied_part)
+    @auth.decorators.check_slot(["tasklets.registry"], access_denied_reply=theme.access_denied_part)
     def _scripts(self, context, slot, payload):
         _ = slot
         #

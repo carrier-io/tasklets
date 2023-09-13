@@ -93,7 +93,7 @@ class Module(module.ModuleModel):
             title="Tasklet runs",
             kind="slot",
             permissions={
-                "permissions": ["tasklets.registry.runs"],
+                "permissions": ["tasklets.registry"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
                     "tasklets": {"admin": True, "viewer": False, "editor": False},
@@ -106,7 +106,7 @@ class Module(module.ModuleModel):
             title="Tasklet run logs",
             kind="slot",
             permissions={
-                "permissions": ["tasklets.registry.run_logs"],
+                "permissions": ["tasklets.registry"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
                     "tasklets": {"admin": True, "viewer": False, "editor": False},
@@ -134,7 +134,7 @@ class Module(module.ModuleModel):
             title="Storage edit",
             kind="slot",
             permissions={
-                "permissions": ["tasklets.storage.edit"],
+                "permissions": ["tasklets.storage"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
                     "tasklets": {"admin": True, "viewer": False, "editor": False},
@@ -147,7 +147,7 @@ class Module(module.ModuleModel):
             title="Storage edit (.json.gz)",
             kind="slot",
             permissions={
-                "permissions": ["tasklets.storage.edit_json_gz"],
+                "permissions": ["tasklets.storage"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
                     "tasklets": {"admin": True, "viewer": False, "editor": False},
