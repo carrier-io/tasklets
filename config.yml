@@ -5,8 +5,8 @@ mongo_options:
 
 # TODO: multiple stores support?
 minio:
-  endpoint: "$MINIO_HOST"
-  region: "$MINIO_REGION"
+  endpoint: "http://carrier-minio:9000"
+  region: "us-east-1"
   access_key: "$MINIO_ACCESS_KEY"
   secret_key: "$MINIO_SECRET_KEY"
   secure: false
@@ -37,8 +37,8 @@ runner:
     # TODO: multiple stores support?
     #
     storage:
-      endpoint: "$MINIO_HOST"
-      region: "$MINIO_REGION"
+      endpoint: "http://carrier-minio:9000"
+      region: "us-east-1"
       access_key: "$MINIO_ACCESS_KEY"
       secret_key: "$MINIO_SECRET_KEY"
       secure: false
