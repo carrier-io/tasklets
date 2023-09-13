@@ -54,7 +54,7 @@ class Route:  # pylint: disable=E1101,R0903
 
 
     @web.route("/storage_bucket_create", methods=["POST"])
-    @auth.decorators.check(["tasklets.storage"])
+    @auth.decorators.check(["tasklets.storage"], mode="tasklets")
     def storage_bucket_create(self):  # pylint: disable=R0201
         """ Route """
         #
