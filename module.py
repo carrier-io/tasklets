@@ -67,8 +67,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             location="left",
@@ -83,8 +82,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.registry"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_registry_",
@@ -98,8 +96,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.registry.runs"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_registry_runs_",
@@ -112,8 +109,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.registry.run_logs"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_registry_run_logs_",
@@ -127,8 +123,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.storage"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_storage_",
@@ -142,8 +137,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.storage.edit"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_storage_edit_",
@@ -156,8 +150,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.storage.edit_json_gz"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_storage_edit_json_gz_",
@@ -171,8 +164,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.schedules"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_schedules_",
@@ -187,8 +179,7 @@ class Module(module.ModuleModel):
                 "permissions": ["tasklets.runs"],
                 "recommended_roles": {
                     "administration": {"admin": True, "viewer": False, "editor": False},
-                    "default": {"admin": True, "viewer": False, "editor": False},
-                    "developer": {"admin": True, "viewer": False, "editor": False},
+                    "tasklets": {"admin": True, "viewer": False, "editor": False},
                 }
             },
             prefix="tasklets_runs_",
