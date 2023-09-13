@@ -32,30 +32,6 @@ from tools import api_tools  # pylint: disable=E0401
 
 
 class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
-    """
-        API Resource
-
-        Endpoint URL structure: <pylon_root>/api/<api_version>/<plugin_name>/<resource_name>
-
-        Example:
-        - Pylon root is at "https://example.com/"
-        - Plugin name is "demo"
-        - We are in subfolder "v1"
-        - Current file name is "myapi.py"
-
-        API URL: https://example.com/api/v1/demo/myapi
-
-        API resources use check_api auth decorator
-        auth.decorators.check_api takes the following arguments:
-        - permissions
-        - scope_id=1
-        - access_denied_reply={"ok": False, "error": "access_denied"},
-    """
-
-
-    def __init__(self, module):
-        self.module = module
-
     @auth.decorators.check_api(["modes.users"])
     def get(self):  # pylint: disable=R0201
         """ Process GET """
