@@ -69,6 +69,7 @@ class Slot:  # pylint: disable=E1101,R0903
                 run_websocket_url=websocket_url,
                 query_websocket_url=websocket_query_url,
                 logs_ts_now=logs_ts_now,
+                run_id=run_id,
             )
 
     @web.slot("tasklets_registry_run_logs_scripts")
