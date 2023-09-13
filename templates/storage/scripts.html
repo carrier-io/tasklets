@@ -20,7 +20,7 @@
         <ul class="custom-nav flex-column">
             {%- for bucket in all_buckets %}
             <li class="custom-nav_item d-flex justify-content-between align-items-center {% if bucket.name == active_bucket_name %}active{% endif %}">
-                <a class="" href="{{ url_for('theme.route_section_subsection', section='tasklets', subsection='storage', bucket=bucket.name) }}">{{ bucket.name|e }}</a>
+                <a class="" href="{{ url_for('theme.route_mode_section_subsection', mode='tasklets', section='tasklets', subsection='storage', bucket=bucket.name) }}">{{ bucket.name|e }}</a>
                 <button class="btn btn-default btn-xs btn-table btn-icon__xs">
                   <a href="{{ url_for('tasklets.storage_bucket_delete', bucket=bucket.name) }}" onclick="return window.confirm('Delete bucket {{ bucket.name|e }}?');">
                     <i class="fas fa-trash-alt"></i>
@@ -55,12 +55,12 @@
           <li class="custom-nav_item d-flex justify-content-between align-items-center">
               <a class="" href="#">{{ object.object_name|e }} - {{ object.size|e }} bytes</a>
               <button class="btn btn-default btn-xs btn-table btn-icon__xs">
-                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='storage', page='edit', bucket=active_bucket_name, obj=object.object_name) }}">
+                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('theme.route_mode_section_subsection_page', mode='tasklets', section='tasklets', subsection='storage', page='edit', bucket=active_bucket_name, obj=object.object_name) }}">
                   <i class="fas fa-pen"></i>
                 </a>
               </button>
               <button class="btn btn-default btn-xs btn-table btn-icon__xs">
-                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='storage', page='edit_json_gz', bucket=active_bucket_name, obj=object.object_name) }}">
+                <a style="padding: 11px 0px 11px 0px;" href="{{ url_for('theme.route_mode_section_subsection_page', mode='tasklets', section='tasklets', subsection='storage', page='edit_json_gz', bucket=active_bucket_name, obj=object.object_name) }}">
                   <i class="fas fa-quidditch"></i>
                 </a>
               </button>

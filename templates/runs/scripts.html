@@ -20,7 +20,7 @@
 
           {%- for stream in streams %}
           <li class="custom-nav_item d-flex justify-content-between align-items-center {% if stream.name == active_stream %}active{% endif %}">
-              <a class="" href="{{ url_for('theme.route_section_subsection', section='tasklets', subsection='runs', stream=stream.name) }}">{{ stream.name|e }}</a>
+              <a class="" href="{{ url_for('theme.route_mode_section_subsection', mode='tasklets', section='tasklets', subsection='runs', stream=stream.name) }}">{{ stream.name|e }}</a>
               <!-- <button class="btn btn-default btn-xs btn-table btn-icon__xs">
                   <i class="fas fa-trash-alt"></i>
               </button> -->
@@ -51,7 +51,7 @@
 
             {%- for cycle in cycles %}
             <li class="custom-nav_item d-flex justify-content-between align-items-center {% if cycle.name == active_cycle %}active{% endif %}">
-                <a class="" href="{{ url_for('theme.route_section_subsection', section='tasklets', subsection='runs', stream=active_stream, cycle=cycle.name) }}">{{ cycle.name|e }}</a>
+                <a class="" href="{{ url_for('theme.route_mode_section_subsection', mode='tasklets', section='tasklets', subsection='runs', stream=active_stream, cycle=cycle.name) }}">{{ cycle.name|e }}</a>
                 <!-- <button class="btn btn-default btn-xs btn-table btn-icon__xs">
                     <i class="fas fa-trash-alt"></i>
                 </button> -->
@@ -131,7 +131,7 @@
 {% include "tasklets:runs/modal_cycle_create.html" %}
 
 <script>
-  var run_logs_url = "{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='registry', page='run_logs') }}";
+  var run_logs_url = "{{ url_for('theme.route_mode_section_subsection_page', mode='tasklets', section='tasklets', subsection='registry', page='run_logs') }}";
   var stream_api_url = "{{ url_for('api.v1.tasklets.streams') }}";
   var cycle_api_url = "{{ url_for('api.v1.tasklets.cycles') }}";
   var runs_url = "{{ url_for('api.v1.tasklets.registry_runs') }}";

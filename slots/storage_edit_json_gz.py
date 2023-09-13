@@ -60,14 +60,14 @@ class Slot:  # pylint: disable=E1101,R0903
             data = gzip.decompress(minio.get_object(bucket, obj).read()).decode()
         except:  # pylint: disable=W0702
             log.exception("Edit (.json.gz): get failed for %s:%s", bucket, obj)
-            return f'<meta http-equiv="refresh" content="0; url={flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket)}">'
+            return f'<meta http-equiv="refresh" content="0; url={flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket)}">'
         #
         with context.app.app_context():
             return self.descriptor.render_template(
                 "storage_edit/scripts.html",
                 **{
                     "save_url": flask.url_for("tasklets.storage_save_json_gz", bucket=bucket, obj=obj),
-                    "cancel_url": flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket),
+                    "cancel_url": flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket),
                     "bucket": bucket,
                     "obj": obj,
                     "object_data": data,

@@ -68,7 +68,7 @@ class Route:  # pylint: disable=E1101,R0903
             except:  # pylint: disable=W0702
                 log.exception("Create failed for %s", bucket)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_bucket_delete")
     @auth.decorators.check(["tasklets.storage"])
@@ -84,7 +84,7 @@ class Route:  # pylint: disable=E1101,R0903
         except:  # pylint: disable=W0702
             log.exception("Remove failed for %s", bucket)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_upload", methods=["POST"])
     @auth.decorators.check(["tasklets.storage"])
@@ -110,7 +110,7 @@ class Route:  # pylint: disable=E1101,R0903
             except:  # pylint: disable=W0702
                 log.exception("Upload failed for %s:%s", bucket, fileobj.filename)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_save", methods=["POST"])
     @auth.decorators.check(["tasklets.storage"])
@@ -130,7 +130,7 @@ class Route:  # pylint: disable=E1101,R0903
             except:  # pylint: disable=W0702
                 log.exception("Edit: save failed for %s:%s", bucket, obj)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_save_json_gz", methods=["POST"])
     @auth.decorators.check(["tasklets.storage"])
@@ -150,7 +150,7 @@ class Route:  # pylint: disable=E1101,R0903
             except:  # pylint: disable=W0702
                 log.exception("Edit (.json.gz): save failed for %s:%s", bucket, obj)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_view")
     @auth.decorators.check(["tasklets.storage"])
@@ -166,7 +166,7 @@ class Route:  # pylint: disable=E1101,R0903
             data = minio.get_object(bucket, obj).read().decode()
         except:  # pylint: disable=W0702
             log.exception("View: get failed for %s:%s", bucket, obj)
-            return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+            return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
         #
         return data
 
@@ -189,7 +189,7 @@ class Route:  # pylint: disable=E1101,R0903
         except:  # pylint: disable=W0702
             log.exception("Download failed for %s:%s", bucket, obj)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_delete")
     @auth.decorators.check(["tasklets.storage"])
@@ -206,4 +206,4 @@ class Route:  # pylint: disable=E1101,R0903
         except:  # pylint: disable=W0702
             log.exception("Delete failed for %s:%s", bucket, obj)
         #
-        return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
+        return flask.redirect(flask.url_for("theme.route_mode_section_subsection", mode="tasklets", section="tasklets", subsection="storage", bucket=bucket))

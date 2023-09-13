@@ -56,7 +56,7 @@
 <script src="{{ url_for('tasklets.static', filename='js/vendor/axios.min.js') }}"></script>
 
 <script>
-  var run_logs_url = "{{ url_for('theme.route_section_subsection_page', section='tasklets', subsection='registry', page='run_logs') }}";
+  var run_logs_url = "{{ url_for('theme.route_mode_section_subsection_page', mode='tasklets', section='tasklets', subsection='registry', page='run_logs') }}";
   var runs_url = "{{ url_for('api.v1.tasklets.registry_runs') }}";
 </script>
 
