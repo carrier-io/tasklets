@@ -29,20 +29,20 @@ function actionsFormatter(value, row, index) {
 
 
 window.actionsEvents = {
-  // "click .task-delete": function (e, value, row, index) {
-  //   if (!window.confirm("Delete task " + row.name + "?")) {
-  //     return;
-  //   }
-  //   axios.delete(api_url + "?id=" + row.id)
-  //     .then(function (response) {
-  //       // console.log(response);
-  //       $("#table").bootstrapTable("remove", {
-  //         field: "id",
-  //         values: [row.id]
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
+  "click .task-delete": function (e, value, row, index) {
+    if (!window.confirm("Delete?")) {
+      return;
+    }
+    axios.delete(api_url + "?id=" + row.id)
+      .then(function (response) {
+        // console.log(response);
+        $("#table").bootstrapTable("remove", {
+          field: "id",
+          values: [row.id]
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 }

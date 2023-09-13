@@ -47,7 +47,7 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
                 #
                 for role in user_roles:
                     result.append({
-                        "id": f'{user["id"]}-{mode_key}-{role}',
+                        "id": f'{user["id"]}:{mode_key}:{role}',
                         "user_id": user["id"],
                         "user_email": user["email"],
                         "user_name": user["name"],
@@ -63,30 +63,31 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
     @auth.decorators.check_api(["modes.users"])
     def post(self):  # pylint: disable=R0201
         """ Process POST """
-        # data = flask.request.get_json()  # TODO: validation with pydantic
-        # #
-        # if mongo.db.tasklets_registry.find_one(filter={"name": data.get("name", "")}):
-        #     log.info("Task with same name already exists")
-        #     return {"ok": False}
-        # #
-        # data["id"] = uuid.uuid4()
-        # mongo.db.tasklets_registry.insert_one(data)
+        data = flask.request.get_json()  # TODO: validation with pydantic
+        #
+        user_id = int(data["user_id"])
+        mode = data["mode"]
+        role = data["role"]
+        #
+        self.module.context.rpc_manager.call.auth_assign_user_to_role(
+            user_id, role, mode
+        )
         #
         return {"ok": True}
 
     @auth.decorators.check_api(["modes.users"])
     def delete(self):  # pylint: disable=R0201
         """ Process DELETE """
-        # data = flask.request.args  # TODO: validation with pydantic
-        # #
-        # if not mongo.db.tasklets_registry.find_one(filter={"id": uuid.UUID(data["id"])}):
-        #     log.info("No such task")
-        #     return {"ok": False}
-        # #
-        # mongo.db.tasklets_registry.delete_one({"id": uuid.UUID(data["id"])})
-        # #
-        # # TODO: delete task runs and artifacts
-        # #
+        data = flask.request.args  # TODO: validation with pydantic
+        #
+        items = data["id"].split(":")
+        #
+        user_id = int(items[0])
+        mode = items[1]
+        role = items[2]
+        #
+        # TODO: RPC in auth_core
+        #
         return {"ok": True}
 
 
