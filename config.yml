@@ -4,7 +4,7 @@ mongo_options:
   uuidRepresentation: "standard"
 
 loki:
-  url: ${LOKI_HOST_INTERNAL}
+  url: ${APP_HOST}/loki/api/v1/push
 
 # TODO: multiple stores support?
 minio:
