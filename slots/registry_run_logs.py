@@ -44,7 +44,7 @@ class Slot:  # pylint: disable=E1101,R0903
     """
 
     @web.slot("tasklets_registry_run_logs_content")
-    @auth.decorators.check_slot(["global_admin"], access_denied_reply=theme.access_denied_part)
+    @auth.decorators.check_slot(["tasklets.registry.run_logs"], access_denied_reply=theme.access_denied_part)
     def _content(self, context, slot, payload):
         _ = slot, payload
         #
@@ -72,7 +72,7 @@ class Slot:  # pylint: disable=E1101,R0903
             )
 
     @web.slot("tasklets_registry_run_logs_scripts")
-    @auth.decorators.check_slot(["global_admin"], access_denied_reply=theme.access_denied_part)
+    @auth.decorators.check_slot(["tasklets.registry.run_logs"], access_denied_reply=theme.access_denied_part)
     def _scripts(self, context, slot, payload):
         _ = slot, payload
         #

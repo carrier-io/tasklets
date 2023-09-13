@@ -54,7 +54,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
     def __init__(self, module):
         self.module = module
 
-    @auth.decorators.check_api(["global_admin"])
+    @auth.decorators.check_api(["tasklets.registry"])
     def get(self):  # pylint: disable=R0201
         """ Process GET """
         result = list()
@@ -80,7 +80,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
             "rows": result,
         }
 
-    @auth.decorators.check_api(["global_admin"])
+    @auth.decorators.check_api(["tasklets.registry"])
     def post(self):  # pylint: disable=R0201
         """ Process POST """
         data = flask.request.get_json()  # TODO: validation with pydantic
@@ -94,7 +94,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
         #
         return {"ok": True}
 
-    @auth.decorators.check_api(["global_admin"])
+    @auth.decorators.check_api(["tasklets.registry"])
     def delete(self):  # pylint: disable=R0201
         """ Process DELETE """
         data = flask.request.args  # TODO: validation with pydantic
@@ -109,7 +109,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
         #
         return {"ok": True}
 
-    @auth.decorators.check_api(["global_admin"])
+    @auth.decorators.check_api(["tasklets.registry"])
     def put(self):  # pylint: disable=R0201
         """ Process PUT """
         name = flask.request.args.get("name")  # TODO: validation with pydantic

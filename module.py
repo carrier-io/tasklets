@@ -60,74 +60,140 @@ class Module(module.ModuleModel):
         self.mongo.db = self.mongo.client[self.mongo.db_name]
         self.descriptor.register_tool("mongo", self.mongo)
         # Theme registration
-        theme.register_section(
+        theme.register_mode(
             "tasklets", "Tasklets",
+        )
+        theme.register_mode_section(
+            "tasklets", "tasklets", "Tasklets",
             kind="holder",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             location="left",
             icon_class="fas fa-info-circle fa-fw",
         )
-        theme.register_subsection(
-            "tasklets",
+        theme.register_mode_subsection(
+            "tasklets", "tasklets",
             "registry", "Registry",
             title="Registry",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.registry"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_registry_",
             icon_class="fas fa-server fa-fw",
         )
-        theme.register_page(
-            "tasklets", "registry", "runs",
+        theme.register_mode_page(
+            "tasklets", "tasklets", "registry", "runs",
             title="Tasklet runs",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.registry.runs"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_registry_runs_",
         )
-        theme.register_page(
-            "tasklets", "registry", "run_logs",
+        theme.register_mode_page(
+            "tasklets", "tasklets", "registry", "run_logs",
             title="Tasklet run logs",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.registry.run_logs"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_registry_run_logs_",
         )
-        theme.register_subsection(
-            "tasklets",
+        theme.register_mode_subsection(
+            "tasklets", "tasklets",
             "storage", "Storage",
             title="Storage",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.storage"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_storage_",
             icon_class="fas fa-server fa-fw",
         )
-        theme.register_page(
-            "tasklets", "storage", "edit",
+        theme.register_mode_page(
+            "tasklets", "tasklets", "storage", "edit",
             title="Storage edit",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.storage.edit"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_storage_edit_",
         )
-        theme.register_page(
-            "tasklets", "storage", "edit_json_gz",
+        theme.register_mode_page(
+            "tasklets", "tasklets", "storage", "edit_json_gz",
             title="Storage edit (.json.gz)",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.storage.edit_json_gz"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_storage_edit_json_gz_",
         )
-        theme.register_subsection(
-            "tasklets",
+        theme.register_mode_subsection(
+            "tasklets", "tasklets",
             "schedules", "Schedules",
             title="Schedules",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.schedules"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_schedules_",
             icon_class="fas fa-server fa-fw",
         )
-        theme.register_subsection(
-            "tasklets",
+        theme.register_mode_subsection(
+            "tasklets", "tasklets",
             "runs", "Runs",
             title="Runs",
             kind="slot",
-            permissions=["global_admin"],
+            permissions={
+                "permissions": ["tasklets.runs"],
+                "recommended_roles": {
+                    "administration": {"admin": True, "viewer": False, "editor": False},
+                    "default": {"admin": True, "viewer": False, "editor": False},
+                    "developer": {"admin": True, "viewer": False, "editor": False},
+                }
+            },
             prefix="tasklets_runs_",
             icon_class="fas fa-server fa-fw",
         )

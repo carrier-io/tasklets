@@ -54,7 +54,7 @@ class Route:  # pylint: disable=E1101,R0903
 
 
     @web.route("/storage_bucket_create", methods=["POST"])
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_bucket_create(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -71,7 +71,7 @@ class Route:  # pylint: disable=E1101,R0903
         return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_bucket_delete")
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_bucket_delete(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -87,7 +87,7 @@ class Route:  # pylint: disable=E1101,R0903
         return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_upload", methods=["POST"])
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_upload(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -113,7 +113,7 @@ class Route:  # pylint: disable=E1101,R0903
         return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_save", methods=["POST"])
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_save(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -133,7 +133,7 @@ class Route:  # pylint: disable=E1101,R0903
         return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_save_json_gz", methods=["POST"])
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_save_json_gz(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -153,7 +153,7 @@ class Route:  # pylint: disable=E1101,R0903
         return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_view")
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_view(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -171,7 +171,7 @@ class Route:  # pylint: disable=E1101,R0903
         return data
 
     @web.route("/storage_download")
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_download(self):  # pylint: disable=R0201
         """ Route """
         #
@@ -192,7 +192,7 @@ class Route:  # pylint: disable=E1101,R0903
         return flask.redirect(flask.url_for("theme.route_section_subsection", section="tasklets", subsection="storage", bucket=bucket))
 
     @web.route("/storage_delete")
-    @auth.decorators.check(["global_admin"])
+    @auth.decorators.check(["tasklets.storage"])
     def storage_delete(self):  # pylint: disable=R0201
         """ Route """
         #

@@ -45,7 +45,7 @@ class Slot:  # pylint: disable=E1101,R0903
     # TODO: multiple stores support?
 
     @web.slot("tasklets_storage_scripts")
-    @auth.decorators.check_slot(["global_admin"], access_denied_reply=theme.access_denied_part)
+    @auth.decorators.check_slot(["tasklets.storage"], access_denied_reply=theme.access_denied_part)
     def _scripts(self, context, slot, payload):
         _ = slot
         #
