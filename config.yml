@@ -32,8 +32,8 @@ runner:
       include_node_name: true
       include_level_name: true
       include_logger_name: true
-      verify: true
-      url: ${LOKI_HOST_INTERNAL}
+      verify: false
+      url: ${LOKI_HOST_INTERNAL}/loki/api/v1/push
     #
     # "vault": {}
     #
