@@ -15,8 +15,8 @@ minio:
 rabbitmq:
   host: "$RABBIT_HOST"
   port: 5672
-  user: "$RABBITMQ_USER"
-  password: "$RABBITMQ_PASSWORD"
+  user: "$RABBIT_USER"
+  password: "$RABBIT_PASSWORD"
   timeout: 15
   vhost: "carrier"
   all_queue: "tasklets-arbiter-all"
