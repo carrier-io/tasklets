@@ -17,7 +17,7 @@
                 <table class="table table-borderless"
                     id="table"
                     data-toggle="table"
-                    data-url="{{ url_for('api.v1.tasklets.users') }}"
+                    data-url="/api/v1/tasklets/users"
                     data-unique-id="id"
                     data-pagination="false"
                   >
@@ -58,7 +58,7 @@
 {% include "tasklets:users/modal_create.html" %}
 
 <script>
-  var api_url = "{{ url_for('api.v1.tasklets.users') }}";
+  var api_url = "/api/v1/tasklets/users";
 </script>
 
 <script src="{{ url_for('tasklets.static', filename='js/users.js') }}"></script>
