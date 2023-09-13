@@ -33,7 +33,7 @@ from tools import api_tools  # pylint: disable=E0401
 
 class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
     @auth.decorators.check_api(["modes.users"])
-    def get(self, target_mode):  # pylint: disable=R0201
+    def get(self):  # pylint: disable=R0201
         """ Process GET """
         result = list()
         #
@@ -52,7 +52,7 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
         }
 
     @auth.decorators.check_api(["modes.users"])
-    def post(self, target_mode):  # pylint: disable=R0201
+    def post(self):  # pylint: disable=R0201
         """ Process POST """
         data = flask.request.get_json()  # TODO: validation with pydantic
         #
@@ -66,7 +66,7 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
         return {"ok": True}
 
     @auth.decorators.check_api(["modes.users"])
-    def delete(self, target_mode):  # pylint: disable=R0201
+    def delete(self):  # pylint: disable=R0201
         """ Process DELETE """
         # data = flask.request.args  # TODO: validation with pydantic
         # #
