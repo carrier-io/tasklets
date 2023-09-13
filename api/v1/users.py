@@ -41,10 +41,19 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
         #
         for mode_key in theme.modes:
             for user in users:
-                user_roles = self.module.context.rpc_manager.call.auth_get_user_roles(user["id"], mode_key)
+                user_roles = self.module.context.rpc_manager.call.auth_get_user_roles(
+                    user["id"], mode_key
+                )
                 #
                 for role in user_roles:
-                    log.info("%s - %s - %s", user, mode_key, role)
+                    result.append({
+                        "id": f'{user["id"]}-{mode_key}-{role}',
+                        "user_id": user["id"],
+                        "user_email": user["email"],
+                        "user_name": user["name"],
+                        "mode": mode_key,
+                        "role": role,
+                    })
         #
         return {
             "total": len(result),
@@ -54,14 +63,14 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
     @auth.decorators.check_api(["modes.users"])
     def post(self):  # pylint: disable=R0201
         """ Process POST """
-        data = flask.request.get_json()  # TODO: validation with pydantic
-        #
-        if mongo.db.tasklets_registry.find_one(filter={"name": data.get("name", "")}):
-            log.info("Task with same name already exists")
-            return {"ok": False}
-        #
-        data["id"] = uuid.uuid4()
-        mongo.db.tasklets_registry.insert_one(data)
+        # data = flask.request.get_json()  # TODO: validation with pydantic
+        # #
+        # if mongo.db.tasklets_registry.find_one(filter={"name": data.get("name", "")}):
+        #     log.info("Task with same name already exists")
+        #     return {"ok": False}
+        # #
+        # data["id"] = uuid.uuid4()
+        # mongo.db.tasklets_registry.insert_one(data)
         #
         return {"ok": True}
 
