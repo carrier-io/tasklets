@@ -28,8 +28,6 @@ from arbiter.arbiter import Arbiter  # pylint: disable=E0401
 
 from tools import theme  # pylint: disable=E0401
 
-from .scheduler import Scheduler
-
 
 class Module(module.ModuleModel):
     """ Pylon module """
@@ -44,7 +42,6 @@ class Module(module.ModuleModel):
         self.storage["endpoint"] = self.storage["endpoint"].replace("http://", "").replace("https://", "").rstrip("/")  # pylint: disable=C0103
         #
         self.arbiter = None
-        Scheduler(self).start()
 
     def init(self):
         """ Init module """
@@ -212,7 +209,9 @@ class Module(module.ModuleModel):
             start_consumer=True,
         )
         #
-        # scheduler
+        # Scheduler
+        from .scheduler import Scheduler  # pylint: disable=E0402,C0415
+        Scheduler(self).start()
 
     def deinit(self):  # pylint: disable=R0201
         """ De-init module """
