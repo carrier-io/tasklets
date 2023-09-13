@@ -31,13 +31,7 @@ from tools import theme  # pylint: disable=E0401
 from tools import api_tools  # pylint: disable=E0401
 
 
-class API(api_tools.APIBase):  # pylint: disable=R0903
-    mode_handlers = {
-        'administration': AdminAPI,
-    }
-
-
-class API(api_tools.APIModeHandler):  # pylint: disable=R0903
+class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
     """
         API Resource
 
@@ -109,3 +103,9 @@ class API(api_tools.APIModeHandler):  # pylint: disable=R0903
         # # TODO: delete task runs and artifacts
         # #
         return {"ok": True}
+
+
+class API(api_tools.APIBase):  # pylint: disable=R0903
+    mode_handlers = {
+        'administration': AdminAPI,
+    }
