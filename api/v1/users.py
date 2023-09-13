@@ -37,11 +37,11 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
         """ Process GET """
         result = list()
         #
-        users = self.context.rpc_manager.call.auth_list_users()
+        users = self.module.context.rpc_manager.call.auth_list_users()
         #
         for mode_key in theme.modes:
             for user in users:
-                user_roles = self.context.rpc_manager.call.auth_get_user_roles(user["id"], mode_key)
+                user_roles = self.module.context.rpc_manager.call.auth_get_user_roles(user["id"], mode_key)
                 #
                 for role in user_roles:
                     log.info("%s - %s - %s", user, mode_key, role)
