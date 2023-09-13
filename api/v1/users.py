@@ -83,7 +83,7 @@ class AdminAPI(api_tools.APIModeHandler):  # pylint: disable=R0903
 
 class API(api_tools.APIBase):  # pylint: disable=R0903
     url_params = [
-        "<string:target_mode>",
+        "<string:mode>",
     ]
 
     mode_handlers = {
