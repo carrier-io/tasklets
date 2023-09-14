@@ -229,6 +229,8 @@ class Module(module.ModuleModel):
             vhost=config.get("vhost", "carrier"),
             all_queue=config.get("all_queue", "tasklets-arbiter-all"),
             start_consumer=True,
+            use_ssl=config.get("use_ssl", False),
+            ssl_verify=config.get("ssl_verify", False),
         )
         #
         # Scheduler

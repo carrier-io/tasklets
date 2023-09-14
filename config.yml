@@ -68,7 +68,7 @@ runner:
         user: "user"
         password: "password"
         vhost: "carrier"
-        queue: "tasklets-events"
+        queue: "events"
         hmac_key: "key"
         hmac_digest: "sha512"
         callback_workers: 16
