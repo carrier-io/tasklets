@@ -53,7 +53,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
     def __init__(self, module):
         self.module = module
 
-    @auth.decorators.check_api(["tasklets.runs"])
+    @auth.decorators.check_api(["tasklets.runs"], mode="tasklets")
     def post(self):  # pylint: disable=R0201
         """ Process POST """
         data = flask.request.get_json()  # TODO: validation with pydantic

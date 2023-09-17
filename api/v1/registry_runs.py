@@ -53,7 +53,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
     def __init__(self, module):
         self.module = module
 
-    @auth.decorators.check_api(["tasklets.registry"])
+    @auth.decorators.check_api(["tasklets.registry"], mode="tasklets")
     def get(self):  # pylint: disable=R0201
         """ Process GET """
         result = list()
@@ -90,7 +90,7 @@ class API(flask_restful.Resource):  # pylint: disable=R0903
             "rows": result,
         }
 
-    @auth.decorators.check_api(["tasklets.registry"])
+    @auth.decorators.check_api(["tasklets.registry"], mode="tasklets")
     def put(self):  # pylint: disable=R0201
         """ Process PUT """
         run_id = flask.request.args.get("id")  # TODO: validation with pydantic
